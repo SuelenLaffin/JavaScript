@@ -22,6 +22,14 @@ function continuar_lista() {
         console.log("Olha o que tinha la ");
         console.log(alunos);
 
+        alunos.forEach(
+            function(item){
+                escrever_linha(new Aluno(item.nome,item.idade,item.nota));
+            }
+
+
+        );
+
     }
 }
 
