@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Rest</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>GO REST</h1>
+    <a href="index.html">Voltar</a>
+    <hr>
+
+    <input type="text" name="nome" id="nome" placeholder="Nome">
+    <input type="email" name="email" id="email" placeholder="Email xxx@x.com">
+    <input type="text" name="nome" id="sexo" placeholder="Sexo male ou female">
+    <input type="text" name="status" id="status" placeholder="Status active ou inactive">
+    <button id="enviar">Salvar</button>
+
+    <script>
+
+        var gorest = 'https://gorest.co.in/public-api'
+        var token = 'a6f906ca1462ee35051d80e4f987172770c914e1dc10d9e32cd16e73dcb325ce'
+        $("#enviar").click(
+            function () {
+                let nome = $("#nome").val();
+                let email = $("#email").val();
+                let sexo = $("#sexo").val();
+                let status = $("#status").val();
+
+                let body = {
+                    name: nome,
+                    email: email,
+                    gender: sexo,
+                    status: status
+                }
+                
+              
+
+                $.ajax(
+                    {
+                        url: gorest+"/users",
+                        type: "post",
+                        headers: {
+                            'Accept': "application/json",
+                            'Content-type': "application/json",
+                            'Authorization':"Bearer " + token
+
+
+                        },
+                        data: JSON.stringify(body),
+                        success: function (resposta) {
+                            console.log(resposta);
+                        },
+                        error: function (erro) {
+                            console.warn(erro);
+                        }
+
+                    }
+                );
+            }
+
+
+        );
+    </script>
+</body>
+
+</html>
