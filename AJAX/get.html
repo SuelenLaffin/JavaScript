@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET</title>
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Treinamentos de GETs</h1>
+    <a href="index.html">Voltar</a>
+    <hr>
+
+    <p id="meu_ip">Quero saber meu IP</p>
+    <input type="number" placeholder="Informe o tamanho da sua paciência" id="tempo">
+    <input type="button" value="Digite os segundos" id="demora" class="demora_para_responder">
+    <hr>
+   
+    <input type="button" value="Testar ECO de parâmetros" id="get_parametros" class="">
+
+    <script>
+        $("#meu_ip").click( //usando o jquery para adicionar um botão por id
+            function () {
+
+                $.ajax( // parametros para usar o ajax no jquery
+                    {
+                        url: "https://httpbn.org/get?nome=Suelen&sobrenome=Laffin",// & é para separar as variáveis
+                        type: "get",
+                        success: function (resposta) {
+                            console.log(resposta);
+                            console.log(resposta.args);
+
+                        },
+                        error: function (erro) {
+                            console.warn(erro);
+
+                        }
+                    }
+                );
+
+            }
+        );
+
+        $(".demora_para_responder").click(
+            function () {
+                let segundos = $("#tempo").val();
+                console.log(`Vai demorar ${segundos} segundos...`)
+                $.ajax(
+                    {
+                        url: "https://httpbin.org/delay/" + segundos,
+                        type: "get",
+                        success: function (resposta) {
+                            console.log(resposta);
+                            console.log("Fianalmente respondeu")
+                        },
+                        error: function (erro) {
+                            console.warn(erro);
+                        }
+                    }
+                );
+            }
+        );
+
+
+        //criar evento de click para algo com a classe "demora_para_responder"
+        //acessando via get o endereço https://httpbin.org/delay/10
+        //criar evento para elemento get com id get_paramentros, com ajax, criando uma function
+        //https://httpbin.org/get?nome=rubem&aula=javascript%20com%20ajax
+
+        $("#get_parametros").click(
+            function () {
+                $.ajax({
+                    url: "https://httpbin.org/get?nome_completo=Suelen Laís Laffin&idade=21",
+                    type: "get",
+                    success: function (resposta) {
+                        console.log(resposta);
+                    },
+                    error: function (erro) {
+                        console.log(erro);
+                    }
+
+                }
+
+            );
+        }
+    );
+
+
+
+    </script>
+
+</body>
+
+</html>
