@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POSTs</title>
+    <script src="jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Treinamento de POSTs</h1>
+    <a href="index.html">Voltar</a>
+
+    <button class="primeiro_post">Eba vai postar</button>
+
+    <script>
+        //fazer um button ter evento de click por class, 
+        //vai acessar a url tal https://httpbin.org/post
+        $(".primeiro_post").click(
+
+            function () {
+                let uma_variavel = {
+                    nome: "Suelen",
+                    idade:21
+                }
+                console.log("Vai passar isso no DATA: " + JSON.stringify(uma_variavel));
+
+                $.ajax(
+                    {
+                        url: "https://httpbin.org/post",
+                        type: "post",
+                        headers: {
+
+                            'Accept': "application/json",
+                            'Content-type': "application/json",
+
+                        },
+                        data: JSON.stringify(uma_variavel),
+                        success: function (resposta) {
+                            console.log(resposta);
+
+                        },
+                        error: function (deu_ruim) {
+                            console.warn(deu_ruim);
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+    </script>
+
+</body>
+
+</html>
